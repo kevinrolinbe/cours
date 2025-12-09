@@ -1,2 +1,21 @@
-
+# IDE
 .idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.tmp
+
+# Node (si utilisé pour le développement)
+node_modules/
+package-lock.json
+
+# Logs
+*.log

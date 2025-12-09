@@ -5,156 +5,389 @@
     <title>Documents de cours</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body { font-family: system-ui, sans-serif; margin: 0; padding: 20px; background: #f4f4f4; }
-        header { margin-bottom: 20px; }
-        h1 { margin: 0 0 10px; font-size: 1.6rem; }
-        .card { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.06); }
-        label { font-weight: 600; }
-        select { padding: 6px 10px; border-radius: 4px; border: 1px solid #ccc; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { padding: 8px; border-bottom: 1px solid #eee; text-align: left; }
-        th { background: #fafafa; }
-        a { color: #0066cc; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        .muted { color: #777; font-size: 0.9rem; }
-        .journal-entry { margin-bottom: 8px; }
-        .journal-date { font-weight: 600; }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+        header {
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin: 0 0 10px;
+            font-size: 1.8rem;
+            color: #333;
+        }
+        h2 {
+            font-size: 1.3rem;
+            margin-top: 0;
+            color: #555;
+        }
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .controls {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+        label {
+            font-weight: 600;
+            margin-right: 8px;
+            color: #333;
+        }
+        select, input[type="text"] {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+        input[type="text"] {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px 8px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+        th {
+            background: #fafafa;
+            font-weight: 600;
+            color: #555;
+            font-size: 0.9rem;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .muted {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            background: #e3f2fd;
+            color: #1976d2;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-left: 8px;
+        }
+        .category-group {
+            margin-bottom: 32px;
+        }
+        .category-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #333;
+            padding-bottom: 6px;
+            border-bottom: 3px solid #0066cc;
+        }
+        .journal-entry {
+            margin-bottom: 16px;
+            padding: 12px;
+            background: #f9f9f9;
+            border-radius: 6px;
+            border-left: 4px solid #0066cc;
+        }
+        .journal-date {
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 6px;
+        }
+        .journal-content {
+            color: #333;
+            line-height: 1.5;
+        }
+        .no-results {
+            padding: 40px;
+            text-align: center;
+            color: #999;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Documents de cours</h1>
-    <p class="muted">Sélectionne ta classe pour voir les documents et le journal de classe correspondant.</p>
+    <h1>📚 Documents de cours</h1>
+    <p class="muted">Sélectionnez votre classe pour accéder aux documents et au journal</p>
 </header>
 
 <div class="card">
-    <label for="classSelect">Classe :</label>
-    <select id="classSelect">
-        <option value="5P-AMPC">5e Professionnel – AMPC</option>
-        <option value="6P-AMPC">6e Professionnel – AMPC</option>
-        <option value="5T-TI">5e Technique – TI</option>
-        <option value="6T-TI">6e Technique – TI</option>
-    </select>
+    <div class="controls">
+        <div>
+            <label for="classSelect">Classe :</label>
+            <select id="classSelect">
+                <option value="5P-AMPC">5e Professionnel – AMPC</option>
+                <option value="6P-AMPC">6e Professionnel – AMPC</option>
+                <option value="5T-TI">5e Technique – TI</option>
+                <option value="6T-TI">6e Technique – TI</option>
+            </select>
+        </div>
+        <div class="search-box">
+            <label for="searchInput">Rechercher :</label>
+            <input type="text" id="searchInput" placeholder="Rechercher un document...">
+        </div>
+    </div>
 </div>
 
 <div class="card">
     <h2>Documents disponibles</h2>
     <div id="filesContainer">
-        <p class="muted">Chargement des documents…</p>
+        <div class="loading">Chargement des documents...</div>
     </div>
 </div>
 
 <div class="card">
     <h2>Journal de classe</h2>
     <div id="journalContainer">
-        <p class="muted">Sélectionne une classe pour afficher le journal.</p>
+        <div class="loading">Chargement du journal...</div>
     </div>
 </div>
 
 <script>
-    // Configuration des classes
-    const CLASSES = [
-        { id: '5P-AMPC', label: '5e Professionnel – AMPC', journalFile: 'data/journal-5p-ampc.json' },
-        { id: '6P-AMPC', label: '6e Professionnel – AMPC', journalFile: 'data/journal-6p-ampc.json' },
-        { id: '5T-TI',   label: '5e Technique – TI',        journalFile: 'data/journal-5t-ti.json' },
-        { id: '6T-TI',   label: '6e Technique – TI',        journalFile: 'data/journal-6t-ti.json' }
-    ];
+// === Configuration ===
+const CLASSES = [
+    { id: '5P-AMPC', label: '5e Professionnel – AMPC', journalFile: 'data/journal-5p-ampc.json' },
+    { id: '6P-AMPC', label: '6e Professionnel – AMPC', journalFile: 'data/journal-6p-ampc.json' },
+    { id: '5T-TI',   label: '5e Technique – TI',        journalFile: 'data/journal-5t-ti.json' },
+    { id: '6T-TI',   label: '6e Technique – TI',        journalFile: 'data/journal-6t-ti.json' }
+];
 
-    let allFiles = [];
+const CACHE_DURATION = 3600000; // 1 heure
+const FILES_CACHE_KEY = 'cours_files_cache';
+const JOURNAL_CACHE_PREFIX = 'cours_journal_';
 
-    async function loadFiles() {
-        try {
-            const res = await fetch('data/files.json');
-            if (!res.ok) throw new Error('HTTP ' + res.status);
-            allFiles = await res.json();
+let allFiles = [];
+let currentSearch = '';
+
+// === Gestion du cache ===
+function getCachedData(key) {
+    try {
+        const cached = localStorage.getItem(key);
+        if (!cached) return null;
+
+        const { data, timestamp } = JSON.parse(cached);
+        if (Date.now() - timestamp > CACHE_DURATION) {
+            localStorage.removeItem(key);
+            return null;
+        }
+        return data;
+    } catch (e) {
+        console.error('Erreur lecture cache:', e);
+        return null;
+    }
+}
+
+function setCachedData(key, data) {
+    try {
+        localStorage.setItem(key, JSON.stringify({
+            data,
+            timestamp: Date.now()
+        }));
+    } catch (e) {
+        console.error('Erreur écriture cache:', e);
+    }
+}
+
+function clearCoursCache() {
+    localStorage.removeItem(FILES_CACHE_KEY);
+    CLASSES.forEach(c => {
+        localStorage.removeItem(JOURNAL_CACHE_PREFIX + c.id);
+    });
+    console.log('✅ Cache vidé');
+    location.reload();
+}
+
+// === Chargement des fichiers ===
+async function loadFiles() {
+    try {
+        // Essayer le cache d'abord
+        const cached = getCachedData(FILES_CACHE_KEY);
+        if (cached) {
+            console.log('📦 Données chargées depuis le cache');
+            allFiles = cached;
             refreshView();
-        } catch (e) {
-            console.error(e);
-            document.getElementById('filesContainer').innerHTML =
-                '<p class="muted">Impossible de charger la liste des documents.</p>';
-        }
-    }
-
-    async function loadJournal(classId) {
-        const config = CLASSES.find(c => c.id === classId);
-        if (!config) return;
-
-        const container = document.getElementById('journalContainer');
-        container.innerHTML = '<p class="muted">Chargement du journal…</p>';
-
-        try {
-            const res = await fetch(config.journalFile);
-            if (!res.ok) throw new Error('HTTP ' + res.status);
-            const data = await res.json();
-
-            if (!data.entries || data.entries.length === 0) {
-                container.innerHTML = '<p class="muted">Aucune entrée de journal pour l\'instant.</p>';
-                return;
-            }
-
-            // Tri par date décroissante
-            data.entries.sort((a, b) => (a.date < b.date ? 1 : -1));
-
-            const html = data.entries.map(entry => `
-        <div class="journal-entry">
-          <div class="journal-date">${entry.date}</div>
-          <div>${entry.content}</div>
-        </div>
-      `).join('');
-
-            container.innerHTML = html;
-        } catch (e) {
-            console.error(e);
-            container.innerHTML = '<p class="muted">Impossible de charger le journal de classe.</p>';
-        }
-    }
-
-    function renderFilesForClass(classId) {
-        const container = document.getElementById('filesContainer');
-        const files = allFiles.filter(f => Array.isArray(f.classes) && f.classes.includes(classId));
-
-        if (files.length === 0) {
-            container.innerHTML = '<p class="muted">Aucun document disponible pour cette classe pour le moment.</p>';
             return;
         }
 
-        const rows = files.map(f => `
-      <tr>
-        <td>${f.category}</td>
-        <td>${f.label}</td>
-        <td><a href="${f.file}" target="_blank" rel="noopener">Ouvrir</a></td>
-      </tr>
-    `).join('');
+        // Sinon charger depuis le réseau
+        console.log('🌐 Chargement des données depuis le réseau');
+        const res = await fetch('data/files.json?t=' + Date.now());
+        if (!res.ok) throw new Error('HTTP ' + res.status);
 
-        container.innerHTML = `
-      <table>
-        <thead>
-          <tr>
-            <th>Document</th>
-            <th>PDF</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${rows}
-        </tbody>
-      </table>
-    `;
+        allFiles = await res.json();
+        setCachedData(FILES_CACHE_KEY, allFiles);
+        refreshView();
+    } catch (e) {
+        console.error('Erreur chargement fichiers:', e);
+        document.getElementById('filesContainer').innerHTML =
+            '<p class="muted">❌ Impossible de charger la liste des documents.</p>';
+    }
+}
+
+// === Rendu des fichiers ===
+function renderFilesForClass(classId) {
+    const container = document.getElementById('filesContainer');
+
+    // Filtrer par classe
+    let files = allFiles.filter(f => f.classes && f.classes.includes(classId));
+
+    // Filtrer par recherche
+    if (currentSearch) {
+        const search = currentSearch.toLowerCase();
+        files = files.filter(f =>
+            f.label.toLowerCase().includes(search) ||
+            (f.category && f.category.toLowerCase().includes(search))
+        );
     }
 
-    function refreshView() {
-        const select = document.getElementById('classSelect');
-        const classId = select.value;
-        renderFilesForClass(classId);
-        loadJournal(classId);
+    if (files.length === 0) {
+        container.innerHTML = '<div class="no-results">Aucun document trouvé</div>';
+        return;
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const select = document.getElementById('classSelect');
-        select.addEventListener('change', refreshView);
-        loadFiles(); // charge files.json puis affiche pour la classe par défaut
+    // Grouper par catégorie
+    const byCategory = {};
+    files.forEach(f => {
+        const cat = f.category || 'Autres';
+        if (!byCategory[cat]) byCategory[cat] = [];
+        byCategory[cat].push(f);
     });
+
+    // Générer le HTML
+    let html = '';
+    for (const [category, items] of Object.entries(byCategory)) {
+        html += `<div class="category-group">
+            <div class="category-title">${category}</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Lien</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+
+        items.forEach(item => {
+            html += `<tr>
+                <td>${item.label}</td>
+                <td><a href="${item.file}" target="_blank">📄 Ouvrir le PDF</a></td>
+            </tr>`;
+        });
+
+        html += `</tbody></table></div>`;
+    }
+
+    container.innerHTML = html;
+}
+
+// === Chargement du journal ===
+async function loadJournal(classId) {
+    const container = document.getElementById('journalContainer');
+
+    try {
+        const config = CLASSES.find(c => c.id === classId);
+        if (!config) throw new Error('Classe inconnue');
+
+        const cacheKey = JOURNAL_CACHE_PREFIX + classId;
+
+        // Essayer le cache d'abord
+        let data = getCachedData(cacheKey);
+
+        if (!data) {
+            const res = await fetch(config.journalFile + '?t=' + Date.now());
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            data = await res.json();
+            setCachedData(cacheKey, data);
+        }
+
+        renderJournal(data);
+    } catch (e) {
+        console.error('Erreur chargement journal:', e);
+        container.innerHTML = '<p class="muted">❌ Impossible de charger le journal.</p>';
+    }
+}
+
+// === Rendu du journal ===
+function renderJournal(entries) {
+    const container = document.getElementById('journalContainer');
+
+    if (!entries || entries.length === 0) {
+        container.innerHTML = '<p class="muted">Aucune entrée dans le journal</p>';
+        return;
+    }
+
+    // Trier par date décroissante
+    const sorted = [...entries].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    let html = '';
+    sorted.forEach(entry => {
+        const date = new Date(entry.date);
+        const dateStr = date.toLocaleDateString('fr-FR', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        html += `<div class="journal-entry">
+            <div class="journal-date">${dateStr}</div>
+            <div class="journal-content">${entry.content}</div>
+        </div>`;
+    });
+
+    container.innerHTML = html;
+}
+
+// === Actualisation de la vue ===
+function refreshView() {
+    const select = document.getElementById('classSelect');
+    const classId = select.value;
+    renderFilesForClass(classId);
+    loadJournal(classId);
+}
+
+// === Événements ===
+document.getElementById('classSelect').addEventListener('change', refreshView);
+
+document.getElementById('searchInput').addEventListener('input', (e) => {
+    currentSearch = e.target.value;
+    refreshView();
+});
+
+// === Initialisation ===
+loadFiles();
+
+// Exposer la fonction de nettoyage du cache
+window.clearCoursCache = clearCoursCache;
 </script>
 
 </body>
 </html>
+
