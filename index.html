@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Documents de cours</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: system-ui, sans-serif; margin: 0; padding: 20px; background: #f4f4f4; }
+        header { margin-bottom: 20px; }
+        h1 { margin: 0 0 10px; font-size: 1.6rem; }
+        .card { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.06); }
+        label { font-weight: 600; }
+        select { padding: 6px 10px; border-radius: 4px; border: 1px solid #ccc; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 8px; border-bottom: 1px solid #eee; text-align: left; }
+        th { background: #fafafa; }
+        a { color: #0066cc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .muted { color: #777; font-size: 0.9rem; }
+        .journal-entry { margin-bottom: 8px; }
+        .journal-date { font-weight: 600; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Documents de cours</h1>
+    <p class="muted">Sélectionne ta classe pour voir les documents et le journal de classe correspondant.</p>
+</header>
+
+<div class="card">
+    <label for="classSelect">Classe :</label>
+    <select id="classSelect">
+        <option value="5P-AMPC">5e Professionnel – AMPC</option>
+        <option value="6P-AMPC">6e Professionnel – AMPC</option>
+        <option value="5T-TI">5e Technique – TI</option>
+        <option value="6T-TI">6e Technique – TI</option>
+    </select>
+</div>
+
+<div class="card">
+    <h2>Documents disponibles</h2>
+    <div id="filesContainer">
+        <p class="muted">Chargement des documents…</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2>Journal de classe</h2>
+    <div id="journalContainer">
+        <p class="muted">Sélectionne une classe pour afficher le journal.</p>
+    </div>
+</div>
+
+<script>
+    // Configuration des classes
+    const CLASSES = [
+        { id: '5P-AMPC', label: '5e Professionnel – AMPC', journalFile: 'data/journal-5p-ampc.json' },
+        { id: '6P-AMPC', label: '6e Professionnel – AMPC', journalFile: 'data/journal-6p-ampc.json' },
+        { id: '5T-TI',   label: '5e Technique – TI',        journalFile: 'data/journal-5t-ti.json' },
+        { id: '6T-TI',   label: '6e Technique – TI',        journalFile: 'data/journal-6t-ti.json' }
+    ];
+
+    let allFiles = [];
+
+    async function loadFiles() {
+        try {
+            const res = await fetch('data/files.json');
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            allFiles = await res.json();
+            refreshView();
+        } catch (e) {
+            console.error(e);
+            document.getElementById('filesContainer').innerHTML =
+                '<p class="muted">Impossible de charger la liste des documents.</p>';
+        }
+    }
+
+    async function loadJournal(classId) {
+        const config = CLASSES.find(c => c.id === classId);
+        if (!config) return;
+
+        const container = document.getElementById('journalContainer');
+        container.innerHTML = '<p class="muted">Chargement du journal…</p>';
+
+        try {
+            const res = await fetch(config.journalFile);
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            const data = await res.json();
+
+            if (!data.entries || data.entries.length === 0) {
+                container.innerHTML = '<p class="muted">Aucune entrée de journal pour l\'instant.</p>';
+                return;
+            }
+
+            // Tri par date décroissante
+            data.entries.sort((a, b) => (a.date < b.date ? 1 : -1));
+
+            const html = data.entries.map(entry => `
+        <div class="journal-entry">
+          <div class="journal-date">${entry.date}</div>
+          <div>${entry.content}</div>
+        </div>
+      `).join('');
+
+            container.innerHTML = html;
+        } catch (e) {
+            console.error(e);
+            container.innerHTML = '<p class="muted">Impossible de charger le journal de classe.</p>';
+        }
+    }
+
+    function renderFilesForClass(classId) {
+        const container = document.getElementById('filesContainer');
+        const files = allFiles.filter(f => Array.isArray(f.classes) && f.classes.includes(classId));
+
+        if (files.length === 0) {
+            container.innerHTML = '<p class="muted">Aucun document disponible pour cette classe pour le moment.</p>';
+            return;
+        }
+
+        const rows = files.map(f => `
+      <tr>
+        <td>${f.category}</td>
+        <td>${f.label}</td>
+        <td><a href="${f.file}" target="_blank" rel="noopener">Ouvrir</a></td>
+      </tr>
+    `).join('');
+
+        container.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Document</th>
+            <th>PDF</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows}
+        </tbody>
+      </table>
+    `;
+    }
+
+    function refreshView() {
+        const select = document.getElementById('classSelect');
+        const classId = select.value;
+        renderFilesForClass(classId);
+        loadJournal(classId);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const select = document.getElementById('classSelect');
+        select.addEventListener('change', refreshView);
+        loadFiles(); // charge files.json puis affiche pour la classe par défaut
+    });
+</script>
+
+</body>
+</html>

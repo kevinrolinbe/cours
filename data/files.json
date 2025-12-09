@@ -1,0 +1,23 @@
+[
+  {
+    "id": "chapitre-1-intro",
+    "category": "Informatique",
+    "label": "Chapitre 1 – Introduction à l'informatique",
+    "file": "docs/chapitre1-intro.pdf",
+    "classes": ["5P-AMPC", "6P-AMPC", "5T-TI", "6T-TI"]
+  },
+  {
+    "id": "chapitre-2-hardware",
+    "category": "Informatique",
+    "label": "Chapitre 2 – Les composants hardware",
+    "file": "docs/chapitre2-hardware.pdf",
+    "classes": ["5P-AMPC", "5T-TI"]
+  },
+  {
+    "id": "chapitre-3-os",
+    "category": "Informatique",
+    "label": "Chapitre 3 – Les systèmes d'exploitation",
+    "file": "docs/chapitre3-os.pdf",
+    "classes": ["6P-AMPC", "6T-TI"]
+  }
+]
