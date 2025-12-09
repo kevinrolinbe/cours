@@ -56,7 +56,8 @@ Menu déroulant proposant 4 classes :
 - **Cache localStorage** pour réduire les requêtes réseau
 - Durée du cache : **1 heure**
 - Indicateurs dans la console pour suivre l'utilisation du cache
-- Fonction `clearCoursCache()` disponible en console pour vider le cache
+- **Bouton "Actualiser les données"** pour vider le cache et recharger manuellement
+- Fonction `clearCoursCache()` également disponible en console
 
 ## 🔧 Optimisations techniques
 

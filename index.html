@@ -83,15 +83,6 @@
             color: #777;
             font-size: 0.9rem;
         }
-        .badge {
-            display: inline-block;
-            padding: 3px 10px;
-            background: #e3f2fd;
-            color: #1976d2;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            margin-left: 8px;
-        }
         .category-group {
             margin-bottom: 32px;
         }
@@ -110,10 +101,25 @@
             border-radius: 6px;
             border-left: 4px solid #0066cc;
         }
-        .journal-date {
+        .journal-head {
             font-weight: 600;
             color: #0066cc;
             margin-bottom: 6px;
+        }
+        .journal-time {
+            font-weight: 400;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .journal-course {
+            font-weight: 600;
+            color: #2e7d32;
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+            padding: 4px 10px;
+            background: #e8f5e9;
+            border-radius: 4px;
+            display: inline-block;
         }
         .journal-content {
             color: #333;
@@ -129,13 +135,89 @@
             padding: 20px;
             color: #666;
         }
+        .cache-btn {
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #555;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .cache-btn:hover {
+            background: #e0e0e0;
+            border-color: #ccc;
+        }
+        .cache-btn:active {
+            background: #d0d0d0;
+        }
+        .file-link {
+            display: inline-block;
+            margin: 4px 8px 4px 0;
+            padding: 6px 12px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            color: #0066cc;
+            text-decoration: none;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .file-link:hover {
+            background: #e9ecef;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        .type-badge {
+            display: inline-block;
+            margin-right: 8px;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-slides {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        .badge-document {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+        .badge-notes {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+        .badge-exercice {
+            background: #fff9c4;
+            color: #f57f17;
+        }
+        .badge-exercices {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .badge-correction {
+            background: #c8e6c9;
+            color: #1b5e20;
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>📚 Documents de cours</h1>
-    <p class="muted">Sélectionnez votre classe pour accéder aux documents et au journal</p>
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <div>
+            <h1>📚 Documents de cours</h1>
+            <p class="muted">Sélectionnez votre classe pour accéder aux documents et au journal</p>
+        </div>
+        <button class="cache-btn" onclick="clearCoursCache()" title="Vider le cache et recharger les données">
+            🔄 Actualiser les données
+        </button>
+    </div>
 </header>
 
 <div class="card">
@@ -289,15 +371,31 @@ function renderFilesForClass(classId) {
                 <thead>
                     <tr>
                         <th>Document</th>
-                        <th>Lien</th>
+                        <th>Fichiers disponibles</th>
                     </tr>
                 </thead>
                 <tbody>`;
 
         items.forEach(item => {
+            // Gérer l'ancien format (un seul fichier) et le nouveau (plusieurs fichiers)
+            let filesHtml = '';
+
+            if (item.files && Array.isArray(item.files)) {
+                // Nouveau format : plusieurs fichiers
+                filesHtml = item.files.map(file => {
+                    const badge = getFileBadge(file.type);
+                    return `<a href="${file.path}" target="_blank" class="file-link" title="${file.label}">
+                        ${badge} ${file.label}
+                    </a>`;
+                }).join(' ');
+            } else if (item.file) {
+                // Ancien format : un seul fichier (rétrocompatibilité)
+                filesHtml = `<a href="${item.file}" target="_blank" class="file-link">📄 Ouvrir le PDF</a>`;
+            }
+
             html += `<tr>
                 <td>${item.label}</td>
-                <td><a href="${item.file}" target="_blank">📄 Ouvrir le PDF</a></td>
+                <td>${filesHtml}</td>
             </tr>`;
         });
 
@@ -305,6 +403,19 @@ function renderFilesForClass(classId) {
     }
 
     container.innerHTML = html;
+}
+
+// === Helper pour les badges ===
+function getFileBadge(type) {
+    const badges = {
+        'slides': '<span class="type-badge badge-slides">Slides</span>',
+        'document': '<span class="type-badge badge-document">Document</span>',
+        'notes': '<span class="type-badge badge-notes">Notes</span>',
+        'exercice': '<span class="type-badge badge-exercice">Exercice</span>',
+        'exercices': '<span class="type-badge badge-exercices">Exercices</span>',
+        'correction': '<span class="type-badge badge-correction">Correction</span>'
+    };
+    return badges[type] || '';
 }
 
 // === Chargement du journal ===
@@ -327,7 +438,9 @@ async function loadJournal(classId) {
             setCachedData(cacheKey, data);
         }
 
-        renderJournal(data);
+        // Gérer les deux formats : tableau direct ou objet avec entries
+        const entries = Array.isArray(data) ? data : (data.entries || []);
+        renderJournal(entries);
     } catch (e) {
         console.error('Erreur chargement journal:', e);
         container.innerHTML = '<p class="muted">❌ Impossible de charger le journal.</p>';
@@ -356,8 +469,14 @@ function renderJournal(entries) {
             day: 'numeric'
         });
 
+        // Ajouter l'heure si elle existe
+        const timeStr = entry.time ? ` <span class="journal-time">(${entry.time})</span>` : '';
+
+        // Ajouter l'intitulé du cours si il existe
+        const courseStr = entry.course ? `<div class="journal-course">${entry.course}</div>` : '';
+
         html += `<div class="journal-entry">
-            <div class="journal-date">${dateStr}</div>
+            <div class="journal-head">${dateStr}${timeStr}${courseStr}</div>
             <div class="journal-content">${entry.content}</div>
         </div>`;
     });

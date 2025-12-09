@@ -4,23 +4,60 @@
     "date": "2025-01-15",
     "category": "Informatique",
     "label": "Chapitre 1 – Introduction à l'informatique",
-    "file": "docs/chapitre1-intro.pdf",
-    "classes": ["5P-AMPC", "6P-AMPC", "5T-TI", "6T-TI"]
+    "classes": ["5P-AMPC", "6P-AMPC", "5T-TI", "6T-TI"],
+    "files": [
+      {
+        "type": "slides",
+        "label": "Slides",
+        "path": "docs/chapitre1-intro-slides.pdf"
+      },
+      {
+        "type": "document",
+        "label": "Document texte",
+        "path": "docs/chapitre1-intro-texte.pdf"
+      },
+      {
+        "type": "notes",
+        "label": "Notes supplémentaires",
+        "path": "docs/chapitre1-intro-notes.pdf"
+      },
+      {
+        "type": "exercice",
+        "label": "Notes supplémentaires",
+        "path": "docs/chapitre1-intro-notes.pdf"
+      }
+    ]
   },
+
   {
-    "id": "2",
+    "id": "1",
     "date": "2025-01-15",
     "category": "Informatique",
-    "label": "Chapitre 2 – Les composants hardware",
-    "file": "docs/chapitre2-hardware.pdf",
-    "classes": ["5P-AMPC", "5T-TI"]
-  },
-  {
-    "id": "3",
-    "date": "2025-01-15",
-    "category": "Informatique",
-    "label": "Chapitre 3 – Les systèmes d'exploitation",
-    "file": "docs/chapitre3-os.pdf",
-    "classes": ["6P-AMPC", "6T-TI"]
+    "label": "Chapitre 1 – Introduction à l'informatique",
+    "classes": [],
+    "files": [
+      {
+        "type": "slides",
+        "label": "Slides",
+        "path": "docs/chapitre1-intro-slides.pdf"
+      },
+      {
+        "type": "document",
+        "label": "Document texte",
+        "path": "docs/chapitre1-intro-texte.pdf"
+      },
+      {
+        "type": "notes",
+        "label": "Notes supplémentaires",
+        "path": "docs/chapitre1-intro-notes.pdf"
+      },
+      {
+        "type": "exercice",
+        "label": "Notes supplémentaires",
+        "path": "docs/chapitre1-intro-notes.pdf"
+      }
+    ]
   }
+
+
 ]
