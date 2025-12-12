@@ -71,6 +71,29 @@
             font-weight: 600;
             color: #555;
             font-size: 0.9rem;
+            user-select: none;
+        }
+        th:hover {
+            background: #f0f0f0;
+        }
+        .sort-icon {
+            font-size: 0.8rem;
+            margin-left: 4px;
+            color: #999;
+        }
+        .files-table {
+            width: 100%;
+        }
+        .files-table td:nth-child(1) {
+            width: 20%;
+            font-weight: 500;
+            color: #333;
+        }
+        .files-table td:nth-child(2) {
+            width: 50%;
+        }
+        .files-table td:nth-child(3) {
+            width: 30%;
         }
         a {
             color: #0066cc;
@@ -333,6 +356,10 @@ async function loadFiles() {
     }
 }
 
+// === Variables de tri ===
+let currentSortColumn = 'category'; // category, label
+let currentSortOrder = 'asc'; // asc, desc
+
 // === Rendu des fichiers ===
 function renderFilesForClass(classId) {
     const container = document.getElementById('filesContainer');
@@ -354,55 +381,90 @@ function renderFilesForClass(classId) {
         return;
     }
 
-    // Grouper par catégorie
-    const byCategory = {};
+    // Ajouter la catégorie par défaut si nécessaire
     files.forEach(f => {
-        const cat = f.category || 'Autres';
-        if (!byCategory[cat]) byCategory[cat] = [];
-        byCategory[cat].push(f);
+        if (!f.category) f.category = 'Autres';
     });
 
-    // Générer le HTML
-    let html = '';
-    for (const [category, items] of Object.entries(byCategory)) {
-        html += `<div class="category-group">
-            <div class="category-title">${category}</div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Document</th>
-                        <th>Fichiers disponibles</th>
-                    </tr>
-                </thead>
-                <tbody>`;
+    // Trier les fichiers
+    files.sort((a, b) => {
+        let comparison = 0;
 
-        items.forEach(item => {
-            // Gérer l'ancien format (un seul fichier) et le nouveau (plusieurs fichiers)
-            let filesHtml = '';
+        if (currentSortColumn === 'category') {
+            comparison = a.category.localeCompare(b.category);
+        } else if (currentSortColumn === 'label') {
+            comparison = a.label.localeCompare(b.label);
+        }
 
-            if (item.files && Array.isArray(item.files)) {
-                // Nouveau format : plusieurs fichiers
-                filesHtml = item.files.map(file => {
-                    const badge = getFileBadge(file.type);
-                    return `<a href="${file.path}" target="_blank" class="file-link" title="${file.label}">
-                        ${badge}
-                    </a>`;
-                }).join(' ');
-            } else if (item.file) {
-                // Ancien format : un seul fichier (rétrocompatibilité)
-                filesHtml = `<a href="${item.file}" target="_blank" class="file-link" title="Ouvrir le PDF">📄</a>`;
-            }
+        return currentSortOrder === 'asc' ? comparison : -comparison;
+    });
 
-            html += `<tr>
-                <td>${item.label}</td>
+    // Générer le HTML avec un seul tableau
+    let html = `
+        <table class="files-table">
+            <thead>
+                <tr>
+                    <th onclick="sortBy('category')" style="cursor: pointer;">
+                        Catégorie ${getSortIcon('category')}
+                    </th>
+                    <th onclick="sortBy('label')" style="cursor: pointer;">
+                        Document ${getSortIcon('label')}
+                    </th>
+                    <th>Fichiers disponibles</th>
+                </tr>
+            </thead>
+            <tbody>`;
+
+    files.forEach(file => {
+        // Générer les badges pour tous les fichiers
+        let filesHtml = '';
+
+        if (file.files && Array.isArray(file.files)) {
+            // Nouveau format : plusieurs fichiers
+            filesHtml = file.files.map(f => {
+                const badge = getFileBadge(f.type);
+                return `<a href="${f.path}" target="_blank" class="file-link" title="${f.label}">
+                    ${badge}
+                </a>`;
+            }).join(' ');
+        } else if (file.file) {
+            // Ancien format : un seul fichier
+            filesHtml = `<a href="${file.file}" target="_blank" class="file-link" title="Ouvrir le PDF">📄</a>`;
+        }
+
+        html += `
+            <tr>
+                <td>${file.category}</td>
+                <td>${file.label}</td>
                 <td>${filesHtml}</td>
             </tr>`;
-        });
+    });
 
-        html += `</tbody></table></div>`;
-    }
-
+    html += `</tbody></table>`;
     container.innerHTML = html;
+}
+
+// === Fonction de tri ===
+function sortBy(column) {
+    if (currentSortColumn === column) {
+        // Inverser l'ordre si on clique sur la même colonne
+        currentSortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
+    } else {
+        // Nouvelle colonne, tri ascendant par défaut
+        currentSortColumn = column;
+        currentSortOrder = 'asc';
+    }
+    refreshView();
+}
+
+// === Icône de tri ===
+function getSortIcon(column) {
+    if (currentSortColumn !== column) {
+        return '<span class="sort-icon">⇅</span>';
+    }
+    return currentSortOrder === 'asc'
+        ? '<span class="sort-icon">▲</span>'
+        : '<span class="sort-icon">▼</span>';
 }
 
 // === Helper pour les badges ===
