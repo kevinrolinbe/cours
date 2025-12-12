@@ -385,12 +385,12 @@ function renderFilesForClass(classId) {
                 filesHtml = item.files.map(file => {
                     const badge = getFileBadge(file.type);
                     return `<a href="${file.path}" target="_blank" class="file-link" title="${file.label}">
-                        ${badge} ${file.label}
+                        ${badge}
                     </a>`;
                 }).join(' ');
             } else if (item.file) {
                 // Ancien format : un seul fichier (rétrocompatibilité)
-                filesHtml = `<a href="${item.file}" target="_blank" class="file-link">📄 Ouvrir le PDF</a>`;
+                filesHtml = `<a href="${item.file}" target="_blank" class="file-link" title="Ouvrir le PDF">📄</a>`;
             }
 
             html += `<tr>
