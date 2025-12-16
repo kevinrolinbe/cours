@@ -5,47 +5,99 @@
     <title>Mr.Rolin - Cours d'informatique</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
             font-family: system-ui, -apple-system, sans-serif;
             margin: 0;
             padding: 20px;
             background: #f4f4f4;
+            color: #333;
         }
         header {
             margin-bottom: 20px;
         }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .header-left {
+            flex: 1;
+            min-width: 250px;
+        }
         h1 {
-            margin: 0 0 10px;
+            margin: 0 0 6px;
             font-size: 1.8rem;
             color: #333;
         }
+        .subtitle {
+            margin: 0;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        .header-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .class-selector {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
         h2 {
             font-size: 1.3rem;
-            margin-top: 0;
+            margin: 0 0 16px;
             color: #555;
+        }
+        .main-content {
+            display: flex;
+            gap: 20px;
+            align-items: stretch;
+        }
+        .column-left {
+            flex: 0 0 35%;
+            display: flex;
+            flex-direction: column;
+        }
+        .column-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
         .card {
             background: #fff;
             border-radius: 8px;
             padding: 20px;
-            margin-bottom: 16px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-        .controls {
             display: flex;
-            gap: 16px;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 16px;
+            flex-direction: column;
+            height: 100%;
+        }
+        .journal-scroll {
+            overflow-y: auto;
+            flex: 1;
+            padding-right: 10px;
         }
         .search-box {
-            flex: 1;
-            min-width: 250px;
+            margin-bottom: 16px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
         }
         label {
             font-weight: 600;
-            margin-right: 8px;
             color: #333;
+            white-space: nowrap;
         }
         select, input[type="text"] {
             padding: 8px 12px;
@@ -54,8 +106,7 @@
             font-size: 1rem;
         }
         input[type="text"] {
-            width: 100%;
-            box-sizing: border-box;
+            flex: 1;
         }
         table {
             width: 100%;
@@ -72,6 +123,7 @@
             color: #555;
             font-size: 0.9rem;
             user-select: none;
+            cursor: pointer;
         }
         th:hover {
             background: #f0f0f0;
@@ -80,9 +132,6 @@
             font-size: 0.8rem;
             margin-left: 4px;
             color: #999;
-        }
-        .files-table {
-            width: 100%;
         }
         .files-table td:nth-child(1) {
             width: 20%;
@@ -105,17 +154,6 @@
         .muted {
             color: #777;
             font-size: 0.9rem;
-        }
-        .category-group {
-            margin-bottom: 32px;
-        }
-        .category-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: #333;
-            padding-bottom: 6px;
-            border-bottom: 3px solid #0066cc;
         }
         .journal-entry {
             margin-bottom: 16px;
@@ -168,6 +206,9 @@
             color: #555;
             transition: all 0.2s;
             white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         .cache-btn:hover {
             background: #e0e0e0;
@@ -176,23 +217,16 @@
         .cache-btn:active {
             background: #d0d0d0;
         }
+        .cache-btn-text {
+            display: inline;
+        }
         .file-link {
             display: inline-block;
             margin: 4px 8px 4px 0;
-            /*padding: 6px 12px;*/
-            /*background: #f8f9fa;*/
-            /*border: 1px solid #dee2e6;*/
-            /*border-radius: 4px;*/
-            /*color: #0066cc;*/
             text-decoration: none;
             transition: all 0.2s;
             white-space: nowrap;
         }
-        /*.file-link:hover {*/
-        /*    background: #e9ecef;*/
-        /*    border-color: #0066cc;*/
-        /*    text-decoration: none;*/
-        /*}*/
         .type-badge {
             display: inline-block;
             margin-right: 8px;
@@ -230,51 +264,134 @@
             background: #c8e6c9;
             color: #1b5e20;
         }
+
+        /* Version mobile */
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+            .header-content {
+                padding: 16px;
+            }
+            .header-controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .class-selector {
+                flex: 1;
+            }
+            .class-selector select {
+                flex: 1;
+            }
+            .cache-btn-text {
+                display: none;
+            }
+            .cache-btn {
+                padding: 8px;
+                min-width: 40px;
+                justify-content: center;
+            }
+            .main-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .column-left, .column-right {
+                flex: none;
+                width: 100%;
+            }
+            .journal-scroll {
+                max-height: 200px;
+                overflow-y: auto;
+            }
+            /* Transformer le tableau en encarts sur mobile */
+            .files-table {
+                display: block;
+            }
+            .files-table thead {
+                display: none;
+            }
+            .files-table tbody {
+                display: block;
+            }
+            .files-table tr {
+                display: block;
+                margin-bottom: 16px;
+                padding: 16px;
+                background: #f9f9f9;
+                border-radius: 8px;
+                border: 1px solid #e0e0e0;
+            }
+            .files-table td {
+                display: block;
+                padding: 8px 0;
+                border: none;
+                width: 100% !important;
+            }
+            .files-table td::before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: #555;
+                display: block;
+                margin-bottom: 4px;
+            }
+            .files-table td:first-child {
+                font-size: 1.1rem;
+                margin-bottom: 8px;
+                padding-bottom: 8px;
+                border-bottom: 2px solid #0066cc;
+            }
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-        <div>
+    <div class="header-content">
+        <div class="header-left">
             <h1>📚 Documents de cours</h1>
-            <p class="muted">Sélectionnez votre classe pour accéder aux documents et au journal</p>
+            <p class="subtitle">Sélectionnez votre classe pour accéder aux documents et au journal</p>
         </div>
-        <button class="cache-btn" onclick="clearCoursCache()" title="Vider le cache et recharger les données">
-            🔄 Actualiser les données
-        </button>
+        <div class="header-controls">
+            <div class="class-selector">
+                <label for="classSelect">Classe :</label>
+                <select id="classSelect">
+                    <option value="5P-AMPC">5e Professionnel – AMPC</option>
+                    <option value="6P-AMPC">6e Professionnel – AMPC</option>
+                    <option value="5T-TI">5e Technique – TI</option>
+                    <option value="6T-TI">6e Technique – TI</option>
+                </select>
+            </div>
+            <button class="cache-btn" onclick="clearCoursCache()" title="Vider le cache et recharger les données">
+                <span>🔄</span>
+                <span class="cache-btn-text">Actualiser</span>
+            </button>
+        </div>
     </div>
 </header>
 
-<div class="card">
-    <div class="controls">
-        <div>
-            <label for="classSelect">Classe :</label>
-            <select id="classSelect">
-                <option value="5P-AMPC">5e Professionnel – AMPC</option>
-                <option value="6P-AMPC">6e Professionnel – AMPC</option>
-                <option value="5T-TI">5e Technique – TI</option>
-                <option value="6T-TI">6e Technique – TI</option>
-            </select>
-        </div>
-        <div class="search-box">
-            <label for="searchInput">Rechercher :</label>
-            <input type="text" id="searchInput" placeholder="Rechercher un document...">
+<div class="main-content">
+    <!-- Colonne gauche : Journal -->
+    <div class="column-left">
+        <div class="card">
+            <h2>Journal de classe</h2>
+            <div class="journal-scroll" id="journalContainer">
+                <div class="loading">Chargement du journal...</div>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="card">
-    <h2>Documents disponibles</h2>
-    <div id="filesContainer">
-        <div class="loading">Chargement des documents...</div>
-    </div>
-</div>
-
-<div class="card">
-    <h2>Journal de classe</h2>
-    <div id="journalContainer">
-        <div class="loading">Chargement du journal...</div>
+    <!-- Colonne droite : Documents -->
+    <div class="column-right">
+        <div class="card">
+            <h2>Documents disponibles</h2>
+            <div class="search-box">
+                <label for="searchInput">Rechercher :</label>
+                <input type="text" id="searchInput" placeholder="Rechercher un document...">
+            </div>
+            <div id="filesContainer">
+                <div class="loading">Chargement des documents...</div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -437,9 +554,9 @@ function renderFilesForClass(classId) {
 
         html += `
             <tr>
-                <td>${file.category}</td>
-                <td>${file.label}</td>
-                <td>${filesHtml}</td>
+                <td data-label="Catégorie">${file.category}</td>
+                <td data-label="Document">${file.label}</td>
+                <td data-label="Fichiers disponibles">${filesHtml}</td>
             </tr>`;
     });
 
