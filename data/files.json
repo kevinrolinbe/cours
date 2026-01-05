@@ -430,8 +430,8 @@
   {
     "id": "1",
     "date": "2025-01-15",
-    "category": "Informatique",
-    "label": "Chapitre 1 – Introduction à l'informatique",
+    "category": "Sample",
+    "label": "Sample Intro Course Material",
     "classes": [],
     "files": [
       {
