@@ -326,6 +326,13 @@ async function loadFiles() {
     }
 }
 
+// === Helper pour échapper le HTML ===
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 // === Rendu du tableau récapitulatif ===
 function renderOverview() {
     const container = document.getElementById('overviewContainer');
@@ -346,10 +353,11 @@ function renderOverview() {
         return;
     }
 
-    // Ajouter la catégorie par défaut si nécessaire
-    files.forEach(f => {
-        if (!f.category) f.category = 'Autres';
-    });
+    // Ajouter la catégorie par défaut si nécessaire (sans mutation)
+    files = files.map(f => ({
+        ...f,
+        category: f.category || 'Autres'
+    }));
 
     // Trier par catégorie puis par label
     files.sort((a, b) => {
@@ -378,8 +386,8 @@ function renderOverview() {
     files.forEach(file => {
         html += `
             <tr>
-                <td>${file.category}</td>
-                <td>${file.label}</td>`;
+                <td>${escapeHtml(file.category)}</td>
+                <td>${escapeHtml(file.label)}</td>`;
         
         CLASSES.forEach(c => {
             const hasClass = file.classes && file.classes.includes(c.id);
