@@ -1,23 +1,181 @@
 {
   "classId": "5P-AMPC",
   "entries": [
-    {
-      "date": "2025-09-02",
-      "time": "08:30-10:00",
-      "course": "Informatique",
-      "content": "Présentation du cours, règlement, explication du fonctionnement du site."
-    },
-    {
-      "date": "2025-09-05",
-      "time": "10:15-11:45",
-      "course": "Informatique",
-      "content": "Chapitre 1 – Introduction à l'informatique. Visionnage des slides + distribution du PDF."
-    },
+
     {
       "date": "2025-09-09",
-      "time": "13:30-15:00",
-      "course": "Informatique",
-      "content": "Chapitre 2 – Les composants hardware. Identification des composants sur une carte mère."
+      "time": "10:50-16:20",
+      "course": "TP Informatique",
+      "content": "Operating system"
+    },
+    {
+      "date": "2025-09-11",
+      "time": "08:20-11:35",
+      "course": "TP Informatique",
+      "content": "Hardware: Les composants"
+    },
+
+    {
+      "date": "2025-09-09",
+      "time": "10:50-16:20",
+      "course": "TP Informatique",
+      "content": "Hardware: Les composants"
+    },
+    {
+      "date": "2025-09-11",
+      "time": "08:20-11:35",
+      "course": "TP Informatique",
+      "content": "Hardware: Compatibilite des composants + ex"
+    },
+
+    {
+      "date": "2025-09-09",
+      "time": "10:50-16:20",
+      "course": "TP Informatique",
+      "content": "Hardware: Les périphériques"
+    },
+    {
+      "date": "2025-09-11",
+      "time": "08:20-11:35",
+      "course": "TP Informatique",
+      "content": "Intro GLPI"
+    },
+
+    {
+      "date": "2025-09-09",
+      "time": "10:50-16:20",
+      "course": "TP Informatique",
+      "content": "GDPR + La Déontologie en Informatique + Commande et script"
+    },
+    {
+      "date": "2025-09-11",
+      "time": "08:20-11:35",
+      "course": "TP Informatique",
+      "content": "Veille technologique + Les impacts de l’évolution numérique"
+    },
+
+    {
+      "date": "2025-10-07",
+      "time": "10:50-16:20",
+      "course": "TP Informatique",
+      "content": ""
+    },
+    {
+      "date": "2025-10-09",
+      "time": "08:20-11:35",
+      "course": "TP Informatique",
+      "content": ""
+    },
+
+    {
+      "date": "2025-10-14",
+      "time": "10:50-16:20",
+      "course": "TP Informatique",
+      "content": "Histoire de l'informatique"
+    },
+    {
+      "date": "2025-10-16",
+      "time": "08:20-11:35",
+      "course": "TP Informatique",
+      "content": ""
+    },
+
+    {
+      "date": "2025-11-04",
+      "time": "10:50-16:20",
+      "course": "TP Informatique",
+      "content": "LogFile + Les principes de la communication bienveillante et professionnelle"
+    },
+    {
+      "date": "2025-11-06",
+      "time": "08:20-11:35",
+      "course": "TP Informatique",
+      "content": "Les principes des systèmes de sauvegarde et d’archivage"
+    },
+
+    {
+      "date": "2025-11-13",
+      "time": "08:20-11:35",
+      "course": "TP Informatique",
+      "content": ""
+    },
+
+    {
+      "date": "2025-11-18",
+      "time": "10:50-16:20",
+      "course": "TP Informatique",
+      "content": "Les principes et les techniques de valorisation des équipements/composants + Exercices"
+    },
+    {
+      "date": "2025-11-21",
+      "time": "08:20-11:35",
+      "course": "TP Informatique",
+      "content": "Bottleneck + Les principes du numérique responsable"
+    },
+
+    {
+      "date": "2025-11-25",
+      "time": "10:50-16:20",
+      "course": "TP Informatique",
+      "content": "Revision"
+    },
+    {
+      "date": "2025-11-27",
+      "time": "08:20-11:35",
+      "course": "TP Informatique",
+      "content": "HTML & CSS"
+    },
+
+    {
+      "date": "2025-12-02",
+      "time": "10:50-16:20",
+      "course": "TP Informatique",
+      "content": ""
+    },
+    {
+      "date": "2025-12-04",
+      "time": "08:20-11:35",
+      "course": "TP Informatique",
+      "content": ""
+    },
+
+    {
+      "date": "2025-12-09",
+      "time": "10:50-16:20",
+      "course": "TP Informatique",
+      "content": ""
+    },
+    {
+      "date": "2025-12-11",
+      "time": "08:20-11:35",
+      "course": "TP Informatique",
+      "content": ""
+    },
+
+    {
+      "date": "2025-12-16",
+      "time": "10:50-16:20",
+      "course": "TP Informatique",
+      "content": ""
+    },
+    {
+      "date": "2025-12-18",
+      "time": "08:20-11:35",
+      "course": "TP Informatique",
+      "content": ""
+    },
+
+    {
+      "date": "2026-01-06",
+      "time": "10:50-16:20",
+      "course": "TP Informatique",
+      "content": "HTML & CSS"
+    },
+    {
+      "date": "2026-01-08",
+      "time": "08:20-11:35",
+      "course": "TP Informatique",
+      "content": ""
     }
   ]
 }
