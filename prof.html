@@ -123,15 +123,19 @@
             z-index: 10;
         }
         .overview-table td:nth-child(1) {
-            width: 15%;
+            width: 12%;
             font-weight: 500;
             color: #333;
         }
         .overview-table td:nth-child(2) {
-            width: 35%;
+            width: 30%;
+        }
+        .overview-table td:nth-child(3) {
+            width: 60px;
+            text-align: center;
         }
         .overview-table .class-cell {
-            width: 12.5%;
+            width: 12%;
             text-align: center;
         }
         .status-indicator {
@@ -153,6 +157,93 @@
             padding: 40px;
             text-align: center;
             color: #999;
+        }
+        .files-tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        .files-btn {
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 4px 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #555;
+            transition: all 0.2s;
+        }
+        .files-btn:hover {
+            background: #0066cc;
+            color: white;
+            border-color: #0066cc;
+        }
+        .files-dropdown {
+            display: none;
+            position: absolute;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            padding: 12px;
+            min-width: 250px;
+            z-index: 1000;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 100%;
+            margin-top: 4px;
+        }
+        .files-dropdown.show {
+            display: block;
+        }
+        .files-dropdown-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #0066cc;
+            font-size: 0.9rem;
+        }
+        .files-dropdown a {
+            display: block;
+            padding: 6px 8px;
+            color: #0066cc;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.2s;
+            font-size: 0.9rem;
+        }
+        .files-dropdown a:hover {
+            background: #f0f0f0;
+            text-decoration: none;
+        }
+        .file-type-label {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 6px;
+            text-transform: uppercase;
+        }
+        .type-slides {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        .type-document {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+        .type-notes {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+        .type-exercice, .type-exercices {
+            background: #fff9c4;
+            color: #f57f17;
+        }
+        .type-correction {
+            background: #c8e6c9;
+            color: #1b5e20;
         }
         .stats-container {
             display: flex;
@@ -372,7 +463,8 @@ function renderOverview() {
             <thead>
                 <tr>
                     <th>Catégorie</th>
-                    <th>Matière</th>`;
+                    <th>Matière</th>
+                    <th style="width: 60px; text-align: center;">Fichiers</th>`;
     
     CLASSES.forEach(c => {
         html += `<th class="class-cell">${c.label}</th>`;
@@ -387,7 +479,35 @@ function renderOverview() {
         html += `
             <tr>
                 <td>${escapeHtml(file.category)}</td>
-                <td>${escapeHtml(file.label)}</td>`;
+                <td>${escapeHtml(file.label)}</td>
+                <td style="text-align: center;">`;
+        
+        // Add files tooltip button if files exist
+        if (file.files && file.files.length > 0) {
+            const safeId = escapeHtml(file.id);
+            html += `
+                    <div class="files-tooltip">
+                        <button class="files-btn" data-file-id="${safeId}">...</button>
+                        <div class="files-dropdown" id="files-dropdown-${safeId}">
+                            <div class="files-dropdown-title">Fichiers disponibles</div>`;
+            
+            file.files.forEach(f => {
+                const typeLabel = getFileTypeLabel(f.type);
+                const safePath = escapeHtml(f.path);
+                const safeType = escapeHtml(f.type);
+                html += `<a href="${safePath}" target="_blank">
+                    <span class="file-type-label type-${safeType}">${typeLabel}</span>${escapeHtml(f.label)}
+                </a>`;
+            });
+            
+            html += `
+                        </div>
+                    </div>`;
+        } else {
+            html += '-';
+        }
+        
+        html += `</td>`;
         
         CLASSES.forEach(c => {
             const hasClass = file.classes && file.classes.includes(c.id);
@@ -413,6 +533,65 @@ function updateStats(totalMatieres, totalCategories) {
     document.getElementById('statTotal').textContent = totalMatieres;
     document.getElementById('statCategories').textContent = totalCategories;
 }
+
+// === Gestion du dropdown des fichiers ===
+function toggleFilesDropdown(event, fileId) {
+    event.stopPropagation();
+    
+    // Valider le fileId
+    if (!fileId || typeof fileId !== 'string') {
+        console.error('Invalid fileId');
+        return;
+    }
+    
+    const dropdown = document.getElementById('files-dropdown-' + fileId);
+    
+    if (!dropdown) {
+        console.error('Dropdown not found for fileId:', fileId);
+        return;
+    }
+    
+    const allDropdowns = document.querySelectorAll('.files-dropdown');
+    
+    // Fermer tous les autres dropdowns
+    allDropdowns.forEach(d => {
+        if (d !== dropdown) {
+            d.classList.remove('show');
+        }
+    });
+    
+    // Toggle le dropdown actuel
+    dropdown.classList.toggle('show');
+}
+
+// === Helper pour les labels de types de fichiers ===
+function getFileTypeLabel(type) {
+    const labels = {
+        'slides': 'Slides',
+        'document': 'Doc',
+        'notes': 'Notes',
+        'exercice': 'Exercice',
+        'exercices': 'Exercices',
+        'correction': 'Correction'
+    };
+    return labels[type] || type;
+}
+
+// === Fermer les dropdowns quand on clique ailleurs ===
+// === Event delegation pour les boutons de fichiers ===
+document.addEventListener('click', function(e) {
+    // Si on clique sur un bouton de fichiers, toggle le dropdown
+    if (e.target.classList.contains('files-btn')) {
+        const fileId = e.target.getAttribute('data-file-id');
+        if (fileId) {
+            toggleFilesDropdown(e, fileId);
+        }
+    } else {
+        // Si on clique ailleurs, fermer tous les dropdowns
+        const allDropdowns = document.querySelectorAll('.files-dropdown');
+        allDropdowns.forEach(d => d.classList.remove('show'));
+    }
+});
 
 // === Événements ===
 document.getElementById('searchInput').addEventListener('input', (e) => {
