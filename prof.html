@@ -484,16 +484,19 @@ function renderOverview() {
         
         // Add files tooltip button if files exist
         if (file.files && file.files.length > 0) {
+            const safeId = escapeHtml(file.id);
             html += `
                     <div class="files-tooltip">
-                        <button class="files-btn" onclick="toggleFilesDropdown(event, '${file.id}')">...</button>
-                        <div class="files-dropdown" id="files-dropdown-${file.id}">
+                        <button class="files-btn" data-file-id="${safeId}">...</button>
+                        <div class="files-dropdown" id="files-dropdown-${safeId}">
                             <div class="files-dropdown-title">Fichiers disponibles</div>`;
             
             file.files.forEach(f => {
                 const typeLabel = getFileTypeLabel(f.type);
-                html += `<a href="${f.path}" target="_blank">
-                    <span class="file-type-label type-${f.type}">${typeLabel}</span>${escapeHtml(f.label)}
+                const safePath = escapeHtml(f.path);
+                const safeType = escapeHtml(f.type);
+                html += `<a href="${safePath}" target="_blank">
+                    <span class="file-type-label type-${safeType}">${typeLabel}</span>${escapeHtml(f.label)}
                 </a>`;
             });
             
@@ -535,7 +538,19 @@ function updateStats(totalMatieres, totalCategories) {
 function toggleFilesDropdown(event, fileId) {
     event.stopPropagation();
     
+    // Valider le fileId
+    if (!fileId || typeof fileId !== 'string') {
+        console.error('Invalid fileId');
+        return;
+    }
+    
     const dropdown = document.getElementById('files-dropdown-' + fileId);
+    
+    if (!dropdown) {
+        console.error('Dropdown not found for fileId:', fileId);
+        return;
+    }
+    
     const allDropdowns = document.querySelectorAll('.files-dropdown');
     
     // Fermer tous les autres dropdowns
@@ -568,6 +583,16 @@ document.addEventListener('click', function() {
     allDropdowns.forEach(d => d.classList.remove('show'));
 });
 
+// === Event delegation pour les boutons de fichiers ===
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('files-btn')) {
+        const fileId = e.target.getAttribute('data-file-id');
+        if (fileId) {
+            toggleFilesDropdown(e, fileId);
+        }
+    }
+});
+
 // === Événements ===
 document.getElementById('searchInput').addEventListener('input', (e) => {
     currentSearch = e.target.value;
@@ -579,8 +604,6 @@ loadFiles();
 
 // Exposer la fonction de nettoyage du cache
 window.clearCoursCache = clearCoursCache;
-// Exposer la fonction de toggle du dropdown
-window.toggleFilesDropdown = toggleFilesDropdown;
 </script>
 
 </body>
