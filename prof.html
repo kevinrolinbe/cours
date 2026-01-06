@@ -578,18 +578,18 @@ function getFileTypeLabel(type) {
 }
 
 // === Fermer les dropdowns quand on clique ailleurs ===
-document.addEventListener('click', function() {
-    const allDropdowns = document.querySelectorAll('.files-dropdown');
-    allDropdowns.forEach(d => d.classList.remove('show'));
-});
-
 // === Event delegation pour les boutons de fichiers ===
 document.addEventListener('click', function(e) {
+    // Si on clique sur un bouton de fichiers, toggle le dropdown
     if (e.target.classList.contains('files-btn')) {
         const fileId = e.target.getAttribute('data-file-id');
         if (fileId) {
             toggleFilesDropdown(e, fileId);
         }
+    } else {
+        // Si on clique ailleurs, fermer tous les dropdowns
+        const allDropdowns = document.querySelectorAll('.files-dropdown');
+        allDropdowns.forEach(d => d.classList.remove('show'));
     }
 });
 
