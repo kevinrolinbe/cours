@@ -2,22 +2,185 @@
   "classId": "6P-AMPC",
   "entries": [
     {
-      "date": "2025-09-03",
-      "time": "08:30-10:00",
-      "course": "Informatique",
-      "content": "Présentation du cours, règlement, explication du fonctionnement du site."
+      "date": "2025-09-02",
+      "time": "08:20-09:50",
+      "course": "Technologie du métier",
+      "content": ""
     },
     {
-      "date": "2025-09-06",
-      "time": "10:15-11:45",
-      "course": "Informatique",
-      "content": "Chapitre 1 – Introduction à l'informatique. Révision des concepts de base."
+      "date": "2025-09-02",
+      "time": "10:05-10:50",
+      "course": "Laboratoire d'Informatique",
+      "content": ""
+    },
+
+    {
+      "date": "2025-09-09",
+      "time": "08:20-09:50",
+      "course": "Technologie du métier",
+      "content": "Curriculum Vitae + Recherche de stage"
     },
     {
-      "date": "2025-09-10",
-      "time": "13:30-15:00",
-      "course": "Informatique",
-      "content": "Chapitre 3 – Les systèmes d'exploitation. Étude comparative Windows, Linux, macOS."
+      "date": "2025-09-09",
+      "time": "10:05-10:50",
+      "course": "Laboratoire d'Informatique",
+      "content": "Curriculum Vitae + Recherche de stage"
+    },
+
+    {
+      "date": "2025-09-16",
+      "time": "08:20-09:50",
+      "course": "Technologie du métier",
+      "content": "Labelisation + Intro GLPI"
+    },
+    {
+      "date": "2025-09-16",
+      "time": "10:05-10:50",
+      "course": "Laboratoire d'Informatique",
+      "content": "Labelisation + Intro GLPI"
+    },
+
+    {
+      "date": "2025-09-23",
+      "time": "08:20-09:50",
+      "course": "Technologie du métier",
+      "content": "GLPI"
+    },
+    {
+      "date": "2025-09-23",
+      "time": "10:05-10:50",
+      "course": "Laboratoire d'Informatique",
+      "content": "GLPI"
+    },
+
+    {
+      "date": "2025-09-30",
+      "time": "08:20-09:50",
+      "course": "Technologie du métier",
+      "content": "GDPR"
+    },
+    {
+      "date": "2025-09-30",
+      "time": "10:05-10:50",
+      "course": "Laboratoire d'Informatique",
+      "content": "La Déontologie en Informatique"
+    },
+
+    {
+      "date": "2025-10-07",
+      "time": "08:20-09:50",
+      "course": "Technologie du métier",
+      "content": "Cours dispensé"
+    },
+    {
+      "date": "2025-10-07",
+      "time": "10:05-10:50",
+      "course": "Laboratoire d'Informatique",
+      "content": "Cours dispensé"
+    },
+
+    {
+      "date": "2025-10-14",
+      "time": "08:20-09:50",
+      "course": "Technologie du métier",
+      "content": "GREVE"
+    },
+    {
+      "date": "2025-10-14",
+      "time": "10:05-10:50",
+      "course": "Laboratoire d'Informatique",
+      "content": "GREVE"
+    },
+
+    {
+      "date": "2025-11-04",
+      "time": "08:20-09:50",
+      "course": "Technologie du métier",
+      "content": "LogFile"
+    },
+    {
+      "date": "2025-11-04",
+      "time": "10:05-10:50",
+      "course": "Laboratoire d'Informatique",
+      "content": "Evolution technologique"
+    },
+
+    {
+      "date": "2025-11-18",
+      "time": "08:20-09:50",
+      "course": "Technologie du métier",
+      "content": "Les principes et les techniques de valorisation des équipements/composants"
+    },
+    {
+      "date": "2025-11-18",
+      "time": "10:05-10:50",
+      "course": "Laboratoire d'Informatique",
+      "content": "Les principes et les techniques de valorisation des équipements/composants"
+    },
+
+    {
+      "date": "2025-11-25",
+      "time": "08:20-09:50",
+      "course": "Technologie du métier",
+      "content": "Révision"
+    },
+    {
+      "date": "2025-11-25",
+      "time": "10:05-10:50",
+      "course": "Laboratoire d'Informatique",
+      "content": "Révision"
+    },
+
+    {
+      "date": "2025-12-02",
+      "time": "08:20-09:50",
+      "course": "Technologie du métier",
+      "content": "Prof en surveillance EXAMEN"
+    },
+    {
+      "date": "2025-12-02",
+      "time": "10:05-10:50",
+      "course": "Laboratoire d'Informatique",
+      "content": "Prof en surveillance EXAMEN"
+    },
+
+    {
+      "date": "2025-12-09",
+      "time": "08:20-09:50",
+      "course": "Technologie du métier",
+      "content": "Bottleneck"
+    },
+    {
+      "date": "2025-12-09",
+      "time": "10:05-10:50",
+      "course": "Laboratoire d'Informatique",
+      "content": "Bottleneck"
+    },
+
+    {
+      "date": "2025-12-16",
+      "time": "08:20-09:50",
+      "course": "Technologie du métier",
+      "content": "Débriefing examen"
+    },
+    {
+      "date": "2025-12-16",
+      "time": "10:05-10:50",
+      "course": "Laboratoire d'Informatique",
+      "content": "Débriefing examen"
+    },
+
+    {
+      "date": "2026-01-06",
+      "time": "08:20-09:50",
+      "course": "Technologie du métier",
+      "content": "Commande et script"
+    },
+    {
+      "date": "2026-01-06",
+      "time": "10:05-10:50",
+      "course": "Laboratoire d'Informatique",
+      "content": "Commande et script"
     }
   ]
 }

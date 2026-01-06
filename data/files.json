@@ -308,7 +308,7 @@
     "date": "2025-09-15",
     "category": "Divers",
     "label": "Les logs files",
-    "classes": ["5P-AMPC", "5T-TI"],
+    "classes": ["5P-AMPC", "6P-AMPC", "5T-TI"],
     "files": [
       {
         "type": "slides",
@@ -412,7 +412,7 @@
     "date": "2025-09-15",
     "category": "Divers",
     "label": "Commandes et scripts",
-    "classes": ["5P-AMPC"],
+    "classes": ["5P-AMPC", "6P-AMPC"],
     "files": [
       {
         "type": "slides",
