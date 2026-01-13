@@ -18,6 +18,13 @@
       "time": "13:30-15:00",
       "course": "Informatique",
       "content": "Chapitre 3 – Les systèmes d'exploitation. Installation et configuration de systèmes Linux."
+    },
+
+    {
+      "date": "2029-01-09",
+      "time": "13:10-14:40",
+      "course": "Informatique",
+      "content": "Veille informatique: CES2026"
     }
   ]
 }

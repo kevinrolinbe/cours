@@ -175,6 +175,19 @@
       "date": "2026-01-08",
       "time": "08:20-11:35",
       "course": "TP Informatique",
+      "content": "Stage (Aide et recherche)"
+    },
+
+    {
+      "date": "2026-01-06",
+      "time": "10:50-16:20",
+      "course": "TP Informatique",
+      "content": "Cloud Computing"
+    },
+    {
+      "date": "2026-01-08",
+      "time": "08:20-11:35",
+      "course": "TP Informatique",
       "content": ""
     }
   ]
