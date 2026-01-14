@@ -445,6 +445,30 @@
       }
     ]
   },
+  {
+    "id": "25",
+    "date": "2026-01-14",
+    "category": "Software",
+    "label": "Virtual Machine",
+    "classes": ["5P-AMPC"],
+    "files": [
+      {
+        "type": "slides",
+        "label": "Slides",
+        "path": "docs/SOFTWARE_VirtualMachine_slide.pdf"
+      },
+      {
+        "type": "document",
+        "label": "Document texte",
+        "path": "docs/SOFTWARE_VirtualMachine.pdf"
+      },
+      {
+        "type": "exercice",
+        "label": "Exercice",
+        "path": "docs/SOFTWARE_VirtualMachine_exercice.pdf"
+      }
+    ]
+  },
 
   {
     "id": "1",
@@ -470,7 +494,7 @@
       },
       {
         "type": "exercice",
-        "label": "Notes supplémentaires",
+        "label": "Exercice",
         "path": "docs/chapitre1-intro-notes.pdf"
       }
     ]
