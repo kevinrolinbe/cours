@@ -431,7 +431,7 @@
     "date": "2026-01-12",
     "category": "Divers",
     "label": "Cloud Computing",
-    "classes": ["5P-AMPC"],
+    "classes": ["5P-AMPC", "6P-AMPC"],
     "files": [
       {
         "type": "slides",

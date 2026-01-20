@@ -179,16 +179,29 @@
     },
 
     {
-      "date": "2026-01-06",
+      "date": "2026-01-13",
       "time": "10:50-16:20",
       "course": "TP Informatique",
       "content": "Cloud Computing"
     },
     {
-      "date": "2026-01-08",
+      "date": "2026-01-15",
       "time": "08:20-11:35",
       "course": "TP Informatique",
+      "content": "PROF ABSENT"
+    },
+
+    {
+      "date": "2026-01-13",
+      "time": "10:50-16:20",
+      "course": "TP Informatique",
       "content": "Virtual Machine"
+    },
+    {
+      "date": "2026-01-15",
+      "time": "08:20-11:35",
+      "course": "TP Informatique",
+      "content": ""
     }
   ]
 }
