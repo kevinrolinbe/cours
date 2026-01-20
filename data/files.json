@@ -47,7 +47,7 @@
     "date": "2025-09-15",
     "category": "Hardware",
     "label": "Les différents types d'écrans",
-    "classes": ["5T-TI"],
+    "classes": ["5T-TI", "5P-AMPC"],
     "files": [
       {
         "type": "slides",
