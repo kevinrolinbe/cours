@@ -84,6 +84,27 @@
       "time": "14:50-16:20",
       "course": "Laboratoire d'informatique appliquée",
       "content": "Les différents types d'écrans"
+    },
+
+    {
+      "date": "2026-01-16",
+      "time": "14:50-16:20",
+      "course": "Laboratoire d'informatique appliquée",
+      "content": "Les différents types d'écrans"
+    },
+
+    {
+      "date": "2026-01-23",
+      "time": "14:50-16:20",
+      "course": "Laboratoire d'informatique appliquée",
+      "content": "Les appareils informatiques en milieu professionnel"
+    },
+
+    {
+      "date": "2026-01-30",
+      "time": "14:50-16:20",
+      "course": "Laboratoire d'informatique appliquée",
+      "content": "Les antivirus"
     }
 
   ]

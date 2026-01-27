@@ -66,7 +66,7 @@
     "date": "2025-09-15",
     "category": "Security",
     "label": "Les antivirus",
-    "classes": [],
+    "classes": ["5P-AMPC", "5T-TI"],
     "files": [
       {
         "type": "slides",
@@ -151,7 +151,7 @@
     "date": "2025-09-15",
     "category": "Hardware",
     "label": "Les appareils informatiques en milieu professionnel",
-    "classes": ["6T-TI"],
+    "classes": ["5P-AMPC", "5T-TI", "6T-TI"],
     "files": [
       {
         "type": "slides",

@@ -1,30 +1,117 @@
 {
   "classId": "6T-TI",
   "entries": [
+
     {
-      "date": "2025-09-03",
-      "time": "08:30-10:00",
+      "date": "2025-09-19",
+      "time": "11:35-14:40",
       "course": "Informatique",
-      "content": "Présentation du cours, règlement, explication du fonctionnement du site."
-    },
-    {
-      "date": "2025-09-06",
-      "time": "10:15-11:45",
-      "course": "Informatique",
-      "content": "Chapitre 1 – Introduction à l'informatique. Révision et approfondissement."
-    },
-    {
-      "date": "2025-09-10",
-      "time": "13:30-15:00",
-      "course": "Informatique",
-      "content": "Chapitre 3 – Les systèmes d'exploitation. Installation et configuration de systèmes Linux."
+      "content": "Curriculum Vitae + Recherche de stage"
     },
 
     {
-      "date": "2029-01-09",
-      "time": "13:10-14:40",
+      "date": "2025-09-26",
+      "time": "11:35-14:40",
+      "course": "Informatique",
+      "content": "Assemblage machine"
+    },
+
+    {
+      "date": "2025-10-03",
+      "time": "11:35-14:40",
+      "course": "Informatique",
+      "content": "Assemblage machine"
+    },
+
+    {
+      "date": "2025-10-10",
+      "time": "11:35-14:40",
+      "course": "Informatique",
+      "content": "Installation et configuration machine"
+    },
+
+    {
+      "date": "2025-10-17",
+      "time": "11:35-14:40",
+      "course": "Informatique",
+      "content": "PROF EN FORMATION"
+    },
+
+    {
+      "date": "2025-11-07",
+      "time": "11:35-14:40",
+      "course": "Informatique",
+      "content": "Configuration machine"
+    },
+
+    {
+      "date": "2025-11-14",
+      "time": "11:35-14:40",
+      "course": "Informatique",
+      "content": "Configuration machine"
+    },
+
+    {
+      "date": "2025-11-21",
+      "time": "11:35-14:40",
+      "course": "Informatique",
+      "content": "Les appareils informatiques en milieu professionnel"
+    },
+
+    {
+      "date": "2025-11-28",
+      "time": "11:35-14:40",
+      "course": "Informatique",
+      "content": "Révision examen"
+    },
+
+    {
+      "date": "2025-12-5",
+      "time": "11:35-14:40",
+      "course": "Informatique",
+      "content": "Révision examen"
+    },
+
+    {
+      "date": "2025-12-12",
+      "time": "11:35-14:40",
+      "course": "Informatique",
+      "content": "Debriefing examen"
+    },
+
+    {
+      "date": "2025-12-19",
+      "time": "11:35-14:40",
+      "course": "Informatique",
+      "content": "Veille informatique"
+    },
+
+    {
+      "date": "2026-01-09",
+      "time": "11:35-14:40",
+      "course": "Informatique",
+      "content": ""
+    },
+
+    {
+      "date": "2026-01-16",
+      "time": "11:35-14:40",
       "course": "Informatique",
       "content": "Veille informatique: CES2026"
+    },
+
+    {
+      "date": "2026-01-23",
+      "time": "11:35-14:40",
+      "course": "Informatique",
+      "content": "Installation et configuration Active Directory"
+    },
+
+    {
+      "date": "2026-01-30",
+      "time": "11:35-14:40",
+      "course": "Informatique",
+      "content": "Installation et configuration de machines"
     }
   ]
 }
