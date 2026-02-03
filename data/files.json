@@ -469,6 +469,25 @@
       }
     ]
   },
+  {
+    "id": "26",
+    "date": "2026-02-02",
+    "category": "Software",
+    "label": "Active Directory",
+    "classes": ["5P-AMPC"],
+    "files": [
+      {
+        "type": "slides",
+        "label": "Slides",
+        "path": "docs/SOFTWARE_ActiveDirectory_slide.pdf"
+      },
+      {
+        "type": "document",
+        "label": "Document texte",
+        "path": "docs/SOFTWARE_ActiveDirectory.pdf"
+      }
+    ]
+  },
 
   {
     "id": "1",

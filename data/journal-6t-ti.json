@@ -112,6 +112,13 @@
       "time": "11:35-14:40",
       "course": "Informatique",
       "content": "Installation et configuration de machines"
+    },
+
+    {
+      "date": "2026-02-06",
+      "time": "11:35-14:40",
+      "course": "Informatique",
+      "content": "Active directory + Gestion des utilisateurs + veyon"
     }
   ]
 }

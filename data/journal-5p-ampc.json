@@ -214,7 +214,14 @@
       "date": "2026-01-29",
       "time": "08:20-11:35",
       "course": "TP Informatique",
-      "content": ""
+      "content": "Veille technologique"
+    },
+
+    {
+      "date": "2026-02-03",
+      "time": "10:50-16:20",
+      "course": "TP Informatique",
+      "content": "Active Directory + Histoire de l'informatique"
     }
   ]
 }
