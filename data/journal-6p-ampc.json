@@ -233,6 +233,58 @@
       "time": "10:05-10:50",
       "course": "Laboratoire d'Informatique",
       "content": "Labo reseau 2"
+    },
+
+    {
+      "date": "2026-02-10",
+      "time": "08:20-09:50",
+      "course": "Technologie du métier",
+      "content": "Veille technologique"
+    },
+    {
+      "date": "2026-02-10",
+      "time": "10:05-10:50",
+      "course": "Laboratoire d'Informatique",
+      "content": "Veille technologique"
+    },
+
+    {
+      "date": "2026-03-03",
+      "time": "08:20-09:50",
+      "course": "Technologie du métier",
+      "content": "Veille technologique"
+    },
+    {
+      "date": "2026-03-03",
+      "time": "10:05-10:50",
+      "course": "Laboratoire d'Informatique",
+      "content": "Veille technologique"
+    },
+
+    {
+      "date": "2026-03-10",
+      "time": "08:20-09:50",
+      "course": "Technologie du métier",
+      "content": "Veille technologique"
+    },
+    {
+      "date": "2026-03-10",
+      "time": "10:05-10:50",
+      "course": "Laboratoire d'Informatique",
+      "content": "Comment fonctionne un site web"
+    },
+
+    {
+      "date": "2026-03-17",
+      "time": "08:20-09:50",
+      "course": "Technologie du métier",
+      "content": "Veille technologique"
+    },
+    {
+      "date": "2026-03-17",
+      "time": "10:05-10:50",
+      "course": "Laboratoire d'Informatique",
+      "content": "Veille technologique"
     }
   ]
 }

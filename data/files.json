@@ -488,6 +488,63 @@
       }
     ]
   },
+  {
+    "id": "27",
+    "date": "2026-03-16",
+    "category": "Web",
+    "label": "La méthodologie d’un diagnostic",
+    "classes": ["6P-AMPC", "5P-AMPC"],
+    "files": [
+      {
+        "type": "slides",
+        "label": "Slides",
+        "path": "docs/WEB_CommentFonctionneUnSiteWeb_slide.pdf"
+      },
+      {
+        "type": "document",
+        "label": "Document texte",
+        "path": "docs/WEB_CommentFonctionneUnSiteWeb.pdf"
+      }
+    ]
+  },
+  {
+    "id": "28",
+    "date": "2026-03-16",
+    "category": "Hardware",
+    "label": "La méthodologie d’un diagnostic",
+    "classes": ["5P-AMPC"],
+    "files": [
+      {
+        "type": "slides",
+        "label": "Slides",
+        "path": "docs/HARDWARE_DiagnosticMethodologie_slide.pdf"
+      },
+      {
+        "type": "document",
+        "label": "Document texte",
+        "path": "docs/HARDWARE_DiagnosticMethodologie.pdf"
+      }
+    ]
+  },
+  {
+    "id": "29",
+    "date": "2026-03-16",
+    "category": "Hardware",
+    "label": "Les bips de diagnostic",
+    "classes": ["5P-AMPC"],
+    "files": [
+      {
+        "type": "slides",
+        "label": "Slides",
+        "path": "docs/HARDWARE_DiagnosticBips_slide.pdf"
+      },
+      {
+        "type": "document",
+        "label": "Document texte",
+        "path": "docs/HARDWARE_DiagnosticBips.pdf"
+      }
+    ]
+  },
 
   {
     "id": "1",
