@@ -320,6 +320,20 @@
       "time": "10:50-16:20",
       "course": "TP Informatique",
       "content": "Diagnostique et dépannage informatique"
+    },
+
+    {
+      "date": "2026-06-02",
+      "time": "10:50-16:20",
+      "course": "TP Informatique",
+      "content": "Révisions"
+    },
+
+    {
+      "date": "2026-06-09",
+      "time": "10:50-16:20",
+      "course": "TP Informatique",
+      "content": "Révisions"
     }
 
   ]
